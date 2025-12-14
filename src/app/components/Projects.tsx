@@ -1,55 +1,15 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  techStack: string[];
-  link: string;
-  github?: string;
-  image: string;
-  featured?: boolean;
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "PESONA 2025",
-    description:
-      "Official information website providing guidance and details for new student orientation programs.",
-    techStack: ["Vue.js", "GSAP", "Aos.js", "TailwindCSS", "Vite"],
-    link: "https://pesona.utdi.ac.id/",
-    github: "#",
-    image: "/projects/project2.png",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Note App",
-    description:
-      "A modern web-based note application designed to deliver a smooth, efficient, and intuitive writing experience.",
-    techStack: ["Vue.js", "Laravel", "PostgreSQL", "TailwindCSS", "Vite"],
-    link: "https://github.com/akbarwjyy/note-app",
-    github: "https://github.com/akbarwjyy/note-app",
-    image: "/projects/project3.png",
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "PORTAL UKM IK ",
-    description:
-      "A web-based organization management platform designed to streamline member administration and content publishing.",
-    techStack: ["React.js", "Express.js", "TailwindCSS", "MySQL"],
-    link: "#",
-    github: "#",
-    image: "/projects/image.png",
-    featured: true,
-  },
-];
+import { useGsapTextReveal } from "../hooks/useGsapTextReveal";
+import { projects } from "../data/portfolio";
 
 export default function Projects() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useGsapTextReveal(headingRef);
+
   return (
     <section id="projects" className="py-24 md:py-32 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -58,7 +18,10 @@ export default function Projects() {
           <span className="text-sm font-semibold text-[#2ECC71] tracking-widest uppercase mb-4 block">
             02 — WORK
           </span>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+          <h2
+            ref={headingRef}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
+          >
             PROJECT
           </h2>
         </div>
@@ -128,7 +91,7 @@ export default function Projects() {
         {/* More projects link */}
         <div data-aos="fade-up" data-aos-delay="300" className="text-center mt-16">
           <a
-            href="#"
+            href="/building"
             className="inline-flex items-center gap-2 px-6 py-3 border-2 border-black text-black font-semibold rounded-full hover:bg-black hover:text-white transition-all duration-300"
           >
             View All Projects
