@@ -1,27 +1,13 @@
 "use client";
 
+import { useRef } from "react";
+import { useGsapTextReveal } from "../hooks/useGsapTextReveal";
+import { skills } from "../data/portfolio";
+
 export default function About() {
-  const skills = [
-    {
-      name: "Frontend",
-      items: ["React.js", "Vue.js", "Next.js", "Tailwind CSS"],
-    },
-    {
-      name: "Backend",
-      items: [
-        "Node.js",
-        "Express.js",
-        "Laravel",
-        "Flask",
-        "PostgreSQL",
-        "MySQL",
-        "MongoDB",
-        "Prisma",
-        "Supabase",
-      ],
-    },
-    { name: "Tools", items: ["Git", "Docker", "Postman", "VS Code"] },
-  ];
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  
+  useGsapTextReveal(headingRef);
 
   return (
     <section
@@ -34,7 +20,10 @@ export default function About() {
           <span className="text-sm font-semibold text-[#2ECC71] tracking-widest uppercase mb-4 block">
             01 — ABOUT
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase">
+          <h2
+            ref={headingRef}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase"
+          >
             WHO I AM
           </h2>
         </div>
