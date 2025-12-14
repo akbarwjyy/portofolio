@@ -1,28 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
 export default function Contact() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   const socialLinks = [
     {
       name: "GitHub",
@@ -61,38 +39,16 @@ export default function Contact() {
         </svg>
       ),
     },
-    {
-      name: "Email",
-      url: "mailto:akbarwjyy8@gmail.com",
-      icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-          <polyline points="22,6 12,13 2,6" />
-        </svg>
-      ),
-    },
   ];
 
   return (
     <section
       id="contact"
-      ref={sectionRef}
       className="py-24 md:py-32 px-6 border-t border-[#E5E7EB]"
     >
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
-        <div
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
+        <div data-aos="fade-up" className="mb-16">
           <span className="text-sm font-semibold text-[#2ECC71] tracking-widest uppercase mb-4 block">
             03 — CONTACT
           </span>
@@ -105,13 +61,7 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
           {/* Left column */}
-          <div
-            className={`transition-all duration-700 delay-200 ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
-          >
+          <div data-aos="fade-right" data-aos-delay="100">
             <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
               Have a project in mind? I&apos;m always open to discussing new
               opportunities, creative ideas, or possibilities to be part of your
@@ -119,14 +69,32 @@ export default function Contact() {
             </p>
 
             <div className="mb-8">
-              <h3 className="text-sm font-semibold text-gray-400 tracking-widest uppercase mb-4">
-                GET IN TOUCH
-              </h3>
               <a
                 href="mailto:akbarwjyy8@gmail.com"
-                className="text-2xl md:text-3xl font-bold hover:text-[#2ECC71] transition-colors duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white font-semibold rounded-full hover:bg-[#2ECC71] transition-all duration-300 hover:scale-105"
               >
-                akbarwjyy8@gmail.com
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                LET&apos;S CONNECT
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M7 17L17 7M17 7H7M17 7V17" />
+                </svg>
               </a>
             </div>
 
@@ -135,12 +103,14 @@ export default function Contact() {
                 FOLLOW ME
               </h3>
               <div className="flex gap-4">
-                {socialLinks.map((link) => (
+                {socialLinks.map((link, index) => (
                   <a
                     key={link.name}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-aos="zoom-in"
+                    data-aos-delay={index * 50 + 200}
                     className="w-12 h-12 border border-[#E5E7EB] rounded-full flex items-center justify-center text-gray-600 hover:border-[#2ECC71] hover:text-[#2ECC71] hover:bg-[#2ECC71]/10 transition-all duration-300"
                     aria-label={link.name}
                   >
@@ -152,13 +122,7 @@ export default function Contact() {
           </div>
 
           {/* Right column - Contact form */}
-          <div
-            className={`transition-all duration-700 delay-400 ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
-          >
+          <div data-aos="fade-left" data-aos-delay="200">
             <form className="space-y-6">
               <div>
                 <label

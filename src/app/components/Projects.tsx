@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 interface Project {
@@ -17,76 +16,45 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
+    title: "PESONA 2025",
     description:
-      "A full-stack e-commerce solution with real-time inventory management, payment integration, and admin dashboard.",
-    techStack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Stripe"],
-    link: "#",
+      "Official information website providing guidance and details for new student orientation programs.",
+    techStack: ["Vue.js", "GSAP", "Aos.js", "TailwindCSS", "Vite"],
+    link: "https://pesona.utdi.ac.id/",
     github: "#",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+    image: "/projects/project2.png",
     featured: true,
   },
   {
     id: 2,
-    title: "Task Management App",
+    title: "Note App",
     description:
-      "Collaborative project management tool with real-time updates, drag-and-drop functionality, and team analytics.",
-    techStack: ["React", "Node.js", "Socket.io", "MongoDB"],
-    link: "#",
-    github: "#",
-    image:
-      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
+      "A modern web-based note application designed to deliver a smooth, efficient, and intuitive writing experience.",
+    techStack: ["Vue.js", "Laravel", "PostgreSQL", "TailwindCSS", "Vite"],
+    link: "https://github.com/akbarwjyy/note-app",
+    github: "https://github.com/akbarwjyy/note-app",
+    image: "/projects/project3.png",
     featured: true,
   },
   {
     id: 3,
-    title: "AI Content Generator",
+    title: "PORTAL UKM IK ",
     description:
-      "AI-powered platform that generates marketing copy, blog posts, and social media content using GPT models.",
-    techStack: ["Next.js", "OpenAI API", "TailwindCSS", "Vercel"],
+      "A web-based organization management platform designed to streamline member administration and content publishing.",
+    techStack: ["React.js", "Express.js", "TailwindCSS", "MySQL"],
     link: "#",
     github: "#",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
+    image: "/projects/image.png",
     featured: true,
   },
 ];
 
 export default function Projects() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="py-24 md:py-32 px-6 bg-white"
-    >
+    <section id="projects" className="py-24 md:py-32 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
-        <div
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
+        <div data-aos="fade-up" className="mb-16">
           <span className="text-sm font-semibold text-[#2ECC71] tracking-widest uppercase mb-4 block">
             02 — WORK
           </span>
@@ -100,12 +68,9 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className={`group flex flex-col transition-all duration-500 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 100 + 200}ms` }}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              className="group flex flex-col"
             >
               {/* Project Image */}
               <div className="relative w-full h-48 overflow-hidden rounded-xl mb-6 bg-gray-100">
@@ -125,7 +90,7 @@ export default function Projects() {
 
                 {/* Tech stack */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.techStack.slice(0, 3).map((tech) => (
+                  {project.techStack.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
                       className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium"
@@ -139,6 +104,8 @@ export default function Projects() {
               {/* Link button - GitHub Universe style */}
               <a
                 href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-between w-full px-6 py-4 bg-gray-100 rounded-xl text-sm font-semibold text-black uppercase tracking-wider hover:bg-gray-200 transition-colors duration-300 group/btn"
               >
                 <span>{project.title.toUpperCase()}</span>
@@ -159,11 +126,7 @@ export default function Projects() {
         </div>
 
         {/* More projects link */}
-        <div
-          className={`text-center mt-16 transition-all duration-700 delay-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
+        <div data-aos="fade-up" data-aos-delay="300" className="text-center mt-16">
           <a
             href="#"
             className="inline-flex items-center gap-2 px-6 py-3 border-2 border-black text-black font-semibold rounded-full hover:bg-black hover:text-white transition-all duration-300"
