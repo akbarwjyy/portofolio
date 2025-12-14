@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import AOSProvider from "./components/AOSProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,11 +16,15 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Akbar Wijaya",
+  title: "Akbar Wijaya | Portfolio",
   description:
-    "Developer Portfolio inspired by GitHub Universe. Creating modern, clean, and scalable web experiences.",
+    "I build modern web applications with a strong focus on clean, scalable backend development.",
   keywords: ["developer", "portfolio", "web development", "next.js", "react"],
-  authors: [{ name: "Developer" }],
+  authors: [{ name: "Akbar Wijaya" }],
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -32,7 +37,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans`}
       >
-        {children}
+        <AOSProvider>{children}</AOSProvider>
       </body>
     </html>
   );
