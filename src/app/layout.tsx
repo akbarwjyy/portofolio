@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import AOSProvider from "./components/AOSProvider";
+import AOSProvider from "./providers/AOSProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,9 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth overflow-x-hidden">
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans`}
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans overflow-x-hidden`}
       >
         <AOSProvider>{children}</AOSProvider>
       </body>
