@@ -11,7 +11,11 @@ export default function Projects() {
   useGsapTextReveal(headingRef);
 
   return (
-    <section id="projects" className="py-24 md:py-32 px-6 bg-white">
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      className="py-24 md:py-32 px-6 bg-white"
+    >
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div data-aos="fade-up" className="mb-16">
@@ -19,6 +23,7 @@ export default function Projects() {
             02 — WORK
           </span>
           <h2
+            id="projects-heading"
             ref={headingRef}
             className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
           >
@@ -27,69 +32,85 @@ export default function Projects() {
         </div>
 
         {/* Projects grid - 3 columns like GitHub Universe */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
           {projects.map((project, index) => (
-            <div
+            <li
               key={project.id}
               data-aos="fade-up"
               data-aos-delay={index * 100}
               className="group flex flex-col"
             >
-              {/* Project Image */}
-              <div className="relative w-full h-48 overflow-hidden rounded-xl mb-6 bg-gray-100">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+              <article>
+                {/* Project Image */}
+                <figure className="relative w-full h-48 overflow-hidden rounded-xl mb-6 bg-gray-100">
+                  <Image
+                    src={project.image}
+                    alt={`Screenshot of ${
+                      project.title
+                    } - ${project.description.slice(0, 50)}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading={index < 3 ? "eager" : "lazy"}
+                  />
+                </figure>
 
-              {/* Project content */}
-              <div className="flex-grow">
-                <p className="text-gray-900 text-lg leading-relaxed mb-6">
-                  {project.description}
-                </p>
+                {/* Project content */}
+                <div className="flex-grow">
+                  <p className="text-gray-900 text-lg leading-relaxed mb-6">
+                    {project.description}
+                  </p>
 
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.techStack.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {/* Tech stack */}
+                  <ul
+                    className="flex flex-wrap gap-2 mb-6"
+                    role="list"
+                    aria-label={`Technologies used in ${project.title}`}
+                  >
+                    {project.techStack.slice(0, 4).map((tech) => (
+                      <li
+                        key={tech}
+                        className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium"
+                      >
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
 
-              {/* Link button - GitHub Universe style */}
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-between w-full px-6 py-4 bg-gray-100 rounded-xl text-sm font-semibold text-black uppercase tracking-wider hover:bg-gray-200 transition-colors duration-300 group/btn"
-              >
-                <span>{project.title.toUpperCase()}</span>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+                {/* Link button - GitHub Universe style */}
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-between w-full px-6 py-4 bg-gray-100 rounded-xl text-sm font-semibold text-black uppercase tracking-wider hover:bg-gray-200 transition-colors duration-300 group/btn"
+                  aria-label={`View ${project.title} project`}
                 >
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </a>
-            </div>
+                  <span>{project.title.toUpperCase()}</span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </a>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
 
         {/* More projects link */}
-        <div data-aos="fade-up" data-aos-delay="300" className="text-center mt-16">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="text-center mt-16"
+        >
           <a
             href="/building"
             className="inline-flex items-center gap-2 px-6 py-3 border-2 border-black text-black font-semibold rounded-full hover:bg-black hover:text-white transition-all duration-300"
@@ -102,6 +123,7 @@ export default function Projects() {
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
+              aria-hidden="true"
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

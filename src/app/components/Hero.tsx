@@ -2,10 +2,20 @@
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden px-4 sm:px-6 py-16 md:py-24">
+    <section
+      id="hero"
+      aria-label="Introduction"
+      className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden px-4 sm:px-6 py-16 md:py-24"
+    >
       {/* Decorative accent - hidden on mobile */}
-      <div className="hidden md:block absolute top-20 right-10 lg:right-20 w-4 h-4 bg-[#2ECC71] rounded-full opacity-60"></div>
-      <div className="hidden md:block absolute bottom-40 left-8 lg:left-16 w-2 h-2 bg-[#2ECC71] rounded-full opacity-40"></div>
+      <div
+        className="hidden md:block absolute top-20 right-10 lg:right-20 w-4 h-4 bg-[#2ECC71] rounded-full opacity-60"
+        aria-hidden="true"
+      ></div>
+      <div
+        className="hidden md:block absolute bottom-40 left-8 lg:left-16 w-2 h-2 bg-[#2ECC71] rounded-full opacity-40"
+        aria-hidden="true"
+      ></div>
 
       <div className="max-w-5xl mx-auto text-center">
         {/* Small tag */}
@@ -14,13 +24,16 @@ export default function Hero() {
           data-aos-delay="0"
           className="inline-flex items-center gap-2 mb-6 md:mb-8 px-3 md:px-4 py-1.5 md:py-2 border border-[#E5E7EB] rounded-full"
         >
-          <span className="w-2 h-2 bg-[#2ECC71] rounded-full animate-pulse"></span>
+          <span
+            className="w-2 h-2 bg-[#2ECC71] rounded-full animate-pulse"
+            aria-hidden="true"
+          ></span>
           <span className="text-xs md:text-sm font-medium tracking-wide text-gray-600">
             AVAILABLE FOR WORK
           </span>
         </div>
 
-        {/* Main heading */}
+        {/* Main heading - Only h1 on page */}
         <h1
           data-aos="fade-up"
           data-aos-delay="100"
@@ -34,12 +47,15 @@ export default function Hero() {
         </h1>
 
         {/* Role badge */}
-        <div data-aos="fade-up" data-aos-delay="200" className="mb-6 md:mb-8">
+        <p data-aos="fade-up" data-aos-delay="200" className="mb-6 md:mb-8">
           <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-gray-500 tracking-wide">
-            Informatics Student <span className="text-[#2ECC71]">|</span>{" "}
+            Informatics Student{" "}
+            <span className="text-[#2ECC71]" aria-hidden="true">
+              |
+            </span>{" "}
             Backend Developer
           </span>
-        </div>
+        </p>
 
         {/* Subheading */}
         <p
@@ -52,10 +68,11 @@ export default function Hero() {
         </p>
 
         {/* CTA Buttons */}
-        <div
+        <nav
           data-aos="fade-up"
           data-aos-delay="400"
           className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-4"
+          aria-label="Primary actions"
         >
           <a
             href="#projects"
@@ -69,7 +86,7 @@ export default function Hero() {
           >
             Get in Touch
           </a>
-        </div>
+        </nav>
       </div>
 
       {/* Scroll indicator - hidden on very small screens */}
@@ -77,6 +94,7 @@ export default function Hero() {
         data-aos="fade-up"
         data-aos-delay="500"
         className="hidden sm:flex absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 animate-bounce"
+        aria-hidden="true"
       >
         <span className="text-xs text-gray-400 tracking-widest">SCROLL</span>
         <svg
@@ -87,6 +105,7 @@ export default function Hero() {
           stroke="currentColor"
           strokeWidth="2"
           className="text-gray-400"
+          aria-hidden="true"
         >
           <path d="M12 5v14M5 12l7 7 7-7" />
         </svg>

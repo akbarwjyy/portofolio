@@ -13,6 +13,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-heading"
       className="py-24 md:py-32 px-6 border-t border-[#E5E7EB]"
     >
       <div className="max-w-6xl mx-auto">
@@ -22,6 +23,7 @@ export default function Contact() {
             03 — CONTACT
           </span>
           <h2
+            id="contact-heading"
             ref={headingRef}
             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase"
           >
@@ -40,43 +42,45 @@ export default function Contact() {
               vision.
             </p>
 
-            <div className="mb-8">
+            <address className="not-italic mb-8">
               <a
                 href="mailto:akbarwjyy8@gmail.com"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white font-semibold rounded-full hover:bg-[#2ECC71] transition-all duration-300 hover:scale-105"
+                aria-label="Send email to Akbar Wijaya"
               >
                 <MailIcon />
                 LET&apos;S CONNECT
                 <ArrowUpRightIcon />
               </a>
-            </div>
+            </address>
 
-            <div>
+            <nav aria-label="Social media links">
               <h3 className="text-sm font-semibold text-gray-400 tracking-widest uppercase mb-4">
                 FOLLOW ME
               </h3>
-              <div className="flex gap-4">
+              <ul className="flex gap-4" role="list">
                 {socialLinks.map((link, index) => (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-aos="zoom-in"
-                    data-aos-delay={index * 50 + 200}
-                    className="w-12 h-12 border border-[#E5E7EB] rounded-full flex items-center justify-center text-gray-600 hover:border-[#2ECC71] hover:text-[#2ECC71] hover:bg-[#2ECC71]/10 transition-all duration-300"
-                    aria-label={link.name}
-                  >
-                    {link.icon}
-                  </a>
+                  <li key={link.name}>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-aos="zoom-in"
+                      data-aos-delay={index * 50 + 200}
+                      className="w-12 h-12 border border-[#E5E7EB] rounded-full flex items-center justify-center text-gray-600 hover:border-[#2ECC71] hover:text-[#2ECC71] hover:bg-[#2ECC71]/10 transition-all duration-300"
+                      aria-label={`Follow on ${link.name}`}
+                    >
+                      {link.icon}
+                    </a>
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            </nav>
           </div>
 
           {/* Right column - Contact form */}
           <div data-aos="fade-left" data-aos-delay="200">
-            <form className="space-y-6">
+            <form className="space-y-6" aria-label="Contact form">
               <div>
                 <label
                   htmlFor="name"
@@ -88,6 +92,8 @@ export default function Contact() {
                   type="text"
                   id="name"
                   name="name"
+                  autoComplete="name"
+                  required
                   className="w-full px-4 py-3 border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#2ECC71] transition-colors duration-300"
                   placeholder="Your name"
                 />
@@ -103,6 +109,8 @@ export default function Contact() {
                   type="email"
                   id="email"
                   name="email"
+                  autoComplete="email"
+                  required
                   className="w-full px-4 py-3 border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#2ECC71] transition-colors duration-300"
                   placeholder="your@email.com"
                 />
@@ -118,6 +126,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   rows={5}
+                  required
                   className="w-full px-4 py-3 border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#2ECC71] transition-colors duration-300 resize-none"
                   placeholder="Tell me about your project..."
                 />
