@@ -6,12 +6,13 @@ import { skills } from "../data/portfolio";
 
 export default function About() {
   const headingRef = useRef<HTMLHeadingElement>(null);
-  
+
   useGsapTextReveal(headingRef);
 
   return (
     <section
       id="about"
+      aria-labelledby="about-heading"
       className="py-24 md:py-32 px-6 border-t border-[#E5E7EB]"
     >
       <div className="max-w-6xl mx-auto">
@@ -21,6 +22,7 @@ export default function About() {
             01 — ABOUT
           </span>
           <h2
+            id="about-heading"
             ref={headingRef}
             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase"
           >
@@ -30,7 +32,7 @@ export default function About() {
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
           {/* Left column - Description */}
-          <div data-aos="fade-right" data-aos-delay="100">
+          <article data-aos="fade-right" data-aos-delay="100">
             <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-6">
               I am an Informatics student at Universitas Teknologi Digital
               Indonesia with a strong focus on backend web development. I
@@ -50,53 +52,58 @@ export default function About() {
             </p>
 
             {/* Stats */}
-            <div
+            <dl
               data-aos="fade-up"
               data-aos-delay="200"
               className="grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-[#E5E7EB]"
             >
               <div>
-                <span className="text-4xl md:text-5xl font-bold text-black">
+                <dt className="sr-only">Years of Experience</dt>
+                <dd className="text-4xl md:text-5xl font-bold text-black">
                   2+
-                </span>
-                <p className="text-sm text-gray-500 mt-2">Years Experience</p>
+                </dd>
+                <dd className="text-sm text-gray-500 mt-2">Years Experience</dd>
               </div>
               <div>
-                <span className="text-4xl md:text-5xl font-bold text-black">
+                <dt className="sr-only">Projects Completed</dt>
+                <dd className="text-4xl md:text-5xl font-bold text-black">
                   10+
-                </span>
-                <p className="text-sm text-gray-500 mt-2">Projects Done</p>
+                </dd>
+                <dd className="text-sm text-gray-500 mt-2">Projects Done</dd>
               </div>
-            </div>
-          </div>
+            </dl>
+          </article>
 
           {/* Right column - Skills */}
           <div>
             <div className="space-y-8">
               {skills.map((category, index) => (
-                <div
+                <article
                   key={category.name}
                   data-aos="fade-left"
                   data-aos-delay={index * 100 + 100}
                   className="p-6 border border-[#E5E7EB] rounded-2xl hover:border-[#2ECC71] transition-colors duration-300"
                 >
                   <h3 className="text-lg font-semibold mb-4 flex items-center gap-3">
-                    <span className="w-8 h-8 bg-[#2ECC71] text-white rounded-full flex items-center justify-center text-sm">
+                    <span
+                      className="w-8 h-8 bg-[#2ECC71] text-white rounded-full flex items-center justify-center text-sm"
+                      aria-hidden="true"
+                    >
                       {index + 1}
                     </span>
                     {category.name}
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <ul className="flex flex-wrap gap-2" role="list">
                     {category.items.map((skill) => (
-                      <span
+                      <li
                         key={skill}
                         className="px-4 py-2 bg-gray-50 text-gray-700 rounded-full text-sm font-medium hover:bg-[#2ECC71] hover:text-white transition-colors duration-300"
                       >
                         {skill}
-                      </span>
+                      </li>
                     ))}
-                  </div>
-                </div>
+                  </ul>
+                </article>
               ))}
             </div>
           </div>

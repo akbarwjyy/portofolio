@@ -26,6 +26,8 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
       }`}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
@@ -33,15 +35,25 @@ export default function Navbar() {
           <a
             href="#"
             className="flex items-center gap-1 text-xl font-bold tracking-tight group"
+            aria-label="Akbar Wijaya - Home"
           >
-            <span className="text-black group-hover:text-[#2ECC71] transition-colors duration-300">
+            <span
+              className="text-black group-hover:text-[#2ECC71] transition-colors duration-300"
+              aria-hidden="true"
+            >
               &lt;
             </span>
             <span className="relative">
               <span className="text-[#2ECC71] font-extrabold">AW</span>
-              <span className="absolute -bottom-0.5 left-0 w-full h-0.5 bg-[#2ECC71] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+              <span
+                className="absolute -bottom-0.5 left-0 w-full h-0.5 bg-[#2ECC71] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                aria-hidden="true"
+              ></span>
             </span>
-            <span className="text-black group-hover:text-[#2ECC71] transition-colors duration-300">
+            <span
+              className="text-black group-hover:text-[#2ECC71] transition-colors duration-300"
+              aria-hidden="true"
+            >
               /&gt;
             </span>
           </a>
@@ -55,7 +67,10 @@ export default function Navbar() {
                 className="text-sm font-medium text-gray-600 hover:text-black transition-colors duration-300 relative group"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2ECC71] group-hover:w-full transition-all duration-300"></span>
+                <span
+                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2ECC71] group-hover:w-full transition-all duration-300"
+                  aria-hidden="true"
+                ></span>
               </a>
             ))}
             <a
@@ -70,9 +85,14 @@ export default function Navbar() {
           <button
             className="md:hidden p-2"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
-            <div className="w-6 h-5 relative flex flex-col justify-between">
+            <div
+              className="w-6 h-5 relative flex flex-col justify-between"
+              aria-hidden="true"
+            >
               <span
                 className={`w-full h-0.5 bg-black transition-all duration-300 ${
                   menuOpen ? "rotate-45 translate-y-2" : ""
@@ -94,6 +114,7 @@ export default function Navbar() {
 
         {/* Mobile navigation */}
         <div
+          id="mobile-menu"
           className={`md:hidden overflow-hidden transition-all duration-300 ${
             menuOpen ? "max-h-64 mt-4" : "max-h-0"
           }`}
