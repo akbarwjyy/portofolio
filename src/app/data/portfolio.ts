@@ -61,13 +61,13 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Note App",
+    title: "Go-Commerce API",
     description:
-      "A modern web-based note application designed to deliver a smooth, efficient, and intuitive writing experience.",
-    techStack: ["Vue.js", "Laravel", "PostgreSQL", "TailwindCSS", "Vite"],
-    link: "https://github.com/akbarwjyy/note-app",
-    github: "https://github.com/akbarwjyy/note-app",
-    image: "/projects/project3.png",
+      "Go-Commerce API is a Golang (Gin)-based e-commerce REST API with a Modular Monolith architecture.",
+    techStack: ["Golang", "GORM", "PostgreSQL", "Docker", "Redis"],
+    link: "https://github.com/akbarwjyy/go-commerce-api.git",
+    github: "https://github.com/akbarwjyy/go-commerce-api.git",
+    image: "/projects/project4.png",
     featured: true,
   },
   {
