@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   turbopack: {},
+  output: "standalone",
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "inline",
