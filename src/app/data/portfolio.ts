@@ -74,7 +74,7 @@ export const projects: Project[] = [
     id: 3,
     title: "PMB - UTDI",
     description:
-      "A web-based organization management platform designed to streamline member administration and content publishing.",
+      "Official UTDI New Student Admission website that provides admission pathways, schedules and registration information",
     techStack: ["Next.js", "GSAP", "TailwindCSS",],
     link: "https://pmb.utdi.ac.id/home/",
     github: "#",
