@@ -1,14 +1,73 @@
 "use client";
 
-import { useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useGsapTextReveal } from "../hooks/useGsapTextReveal";
 import { socialLinks } from "../data/socialLinks";
 import { MailIcon, ArrowUpRightIcon } from "./icons/SocialIcons";
 
 export default function Contact() {
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+  const gasEndpoint = process.env.NEXT_PUBLIC_GAS_ENDPOINT;
 
   useGsapTextReveal(headingRef, { stagger: 0.03 });
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitStatus(null);
+
+    if (!gasEndpoint) {
+      setSubmitStatus({
+        type: "error",
+        message:
+          "Form endpoint belum dikonfigurasi. Tambahkan NEXT_PUBLIC_GAS_ENDPOINT.",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const formElement = event.currentTarget;
+      const formData = new FormData(formElement);
+      const payload = new URLSearchParams();
+
+      formData.forEach((value, key) => {
+        if (typeof value === "string") {
+          payload.append(key, value);
+        }
+      });
+
+      payload.append("submittedAt", new Date().toISOString());
+
+      await fetch(gasEndpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+        body: payload.toString(),
+      });
+
+      formElement.reset();
+      setSubmitStatus({
+        type: "success",
+        message: "Pesan berhasil dikirim. Terima kasih sudah menghubungi saya.",
+      });
+    } catch {
+      setSubmitStatus({
+        type: "error",
+        message:
+          "Terjadi kendala saat mengirim pesan. Coba lagi beberapa saat.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section
@@ -80,7 +139,11 @@ export default function Contact() {
 
           {/* Right column - Contact form */}
           <div data-aos="fade-left" data-aos-delay="200">
-            <form className="space-y-6" aria-label="Contact form">
+            <form
+              className="space-y-6"
+              aria-label="Contact form"
+              onSubmit={handleSubmit}
+            >
               <div>
                 <label
                   htmlFor="name"
@@ -133,10 +196,21 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="w-full px-8 py-4 bg-black text-white font-semibold rounded-full hover:bg-[#2ECC71] transition-all duration-300 hover:scale-[1.02]"
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
+              <p
+                aria-live="polite"
+                className={`text-sm ${
+                  submitStatus?.type === "error"
+                    ? "text-red-600"
+                    : "text-[#2ECC71]"
+                }`}
+              >
+                {submitStatus?.message}
+              </p>
             </form>
           </div>
         </div>
